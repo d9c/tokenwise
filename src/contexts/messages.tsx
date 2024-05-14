@@ -19,13 +19,7 @@ export const MessagesContext = createContext<{
 });
 
 export const MessagesProvider = ({ children }: { children: ReactNode }) => {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: nanoid(),
-      text: 'Hello, world!',
-      isUserMessage: false,
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const [isMessageUpdating, setIsMessageUpdating] = useState(false);
 

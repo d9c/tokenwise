@@ -4,18 +4,16 @@ import {
   type ReconnectInterval,
 } from 'eventsource-parser';
 
-export type ChatGPTAgent = 'user' | 'system';
-
-export interface ChatGPTMessage {
-  role: ChatGPTAgent;
+export type ChatGPTMessage = {
+  role: 'user' | 'system';
   content: string;
-}
+};
 
-export interface OpenAIStreamPayload {
+export type OpenAIStreamPayload = {
   model: string;
-  messages: ChatGPTMessage[];
   stream: boolean;
-}
+  messages: ChatGPTMessage[];
+};
 
 export const OpenAIStream = async (
   apiKey: string,
