@@ -3,43 +3,34 @@
 import { useContext } from 'react';
 import { MessagesContext } from '@/contexts/messages';
 import { MarkdownLite } from '@/components/markdown-lite';
-import { cn } from '@/lib/utils';
+import { Bot, User } from 'lucide-react';
 
 export const ChatMessages = () => {
   const { messages } = useContext(MessagesContext);
   const inverseMessages = [...messages].reverse();
 
   return (
-    <div className="flex h-full w-full flex-col-reverse gap-5 overflow-y-auto border border-solid border-[#fff] bg-[#2B2F3B]">
-      <div className="flex-1 flex-grow" />
-      {inverseMessages.map((message, index) => (
-        <div className="chat-message" key={index}>
-          <div
-            className={cn('flex items-end', {
-              'justify-end': message.isUserMessage,
-            })}
-          >
-            <div
-              className={cn(
-                'mx-2 flex max-w-xs flex-col space-y-2 overflow-x-hidden text-sm',
-                {
-                  'order-1 items-end': message.isUserMessage,
-                  'order-2 items-start': !message.isUserMessage,
-                }
-              )}
-            >
-              <p
-                className={cn('rounded-lg px-4 py-2', {
-                  'bg-blue-600 text-white': message.isUserMessage,
-                  'bg-gray-200 text-gray-900': !message.isUserMessage,
-                })}
-              >
-                <MarkdownLite text={message.text} />
-              </p>
+    <div className="w-full overflow-y-auto">
+      <div className="mx-auto w-[48rem]">
+        <div className="flex flex-col-reverse gap-9">
+          <div className="flex-1 flex-grow" />
+          {inverseMessages.map((message, index) => (
+            <div className="chat-message flex gap-2" key={index}>
+              <div className="w-[24px]">
+                {message.isUserMessage ? <User size={24} /> : <Bot size={24} />}
+              </div>
+              <div className="flex flex-col gap-2">
+                <span className="text-sm font-semibold">
+                  {message.isUserMessage ? 'User' : 'ChatGPT'}
+                </span>
+                <span className="text-sm">
+                  <MarkdownLite text={message.text} />
+                </span>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 };

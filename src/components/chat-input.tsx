@@ -84,7 +84,7 @@ export const ChatInput = () => {
   });
 
   return (
-    <div className="relative mt-4">
+    <div className="relative mx-auto w-[48rem] text-base">
       <TextareaAutosize
         ref={textareaRef}
         onKeyDown={(e) => {
@@ -105,16 +105,16 @@ export const ChatInput = () => {
         disabled={isPending}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Write a message..."
-        className="block w-full resize-none rounded-lg border border-[#9b9b9b] bg-transparent py-3 pl-4 pr-14 text-sm text-white focus:outline-none disabled:opacity-50"
+        className="block w-full resize-none rounded-lg border border-[#9b9b9b] bg-transparent py-3.5 pl-6 pr-12 text-sm text-white focus:outline-none disabled:opacity-50"
       />
-      <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
-        <kbd className="inline-flex items-center rounded border border-gray-200 bg-white px-1 font-sans text-xs text-gray-400">
+      <div className="absolute bottom-1.5 right-2">
+        <button className="flex h-[30px] w-[30px] items-center justify-center rounded-lg bg-white">
           {isPending ? (
-            <Loader2 className="h-3 w-3 animate-spin" />
+            <Loader2 color="black" size={24} className="animate-spin" />
           ) : (
-            <CornerDownLeft className="h-3 w-3" />
+            <CornerDownLeft color="black" size={24} />
           )}
-        </kbd>
+        </button>
       </div>
     </div>
   );

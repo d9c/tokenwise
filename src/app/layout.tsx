@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={recursive.className}>
-        <div className="bg-default flex h-screen w-screen items-center justify-center">
+        <div className="flex h-screen w-screen items-center justify-center overflow-hidden bg-default">
           <Providers>{children}</Providers>
         </div>
       </body>
