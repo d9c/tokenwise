@@ -3,27 +3,22 @@
 import { useState, useContext } from 'react';
 import { useRouter } from 'next/navigation';
 import { ApiKeyContext } from '@/contexts/api-key';
-import { FaKey } from 'react-icons/fa';
+import { Github, KeyRound } from 'lucide-react';
 
 export const Login = () => {
-  const router = useRouter();
-
   const [key, setKey] = useState('');
   const { setApiKey } = useContext(ApiKeyContext);
 
-  const validateKey = async (key: string) => {
-    // Implement validation logic here
-    return key.startsWith('sk-'); // Example validation
-  };
+  const router = useRouter();
 
-  const handleOnClick = async () => {
-    const isValid = await validateKey(key);
-    if (isValid) {
-      setApiKey(key);
-      router.push('/chat');
+  const handleOnClick = () => {
+    if (!key.startsWith('sk-')) {
+      window.alert('Invalid API Key. Please check your key and try again.');
+      setKey('');
       return;
     }
-    // setError('Invalid API Key. Please check your key and try again.');
+    setApiKey(key);
+    router.push('/chat');
   };
 
   return (
@@ -43,7 +38,7 @@ export const Login = () => {
 
         <div className="flex">
           <span className="inline-flex items-center rounded-s-md border border-e-0 border-gray-600 bg-gray-600 px-3 text-sm text-gray-400">
-            <FaKey size={14} />
+            <KeyRound size={16} />
           </span>
           <input
             type="password"
@@ -65,17 +60,29 @@ export const Login = () => {
         </button>
       </div>
 
-      <div className="mt-20">
-        <span className="block text-center text-sm">How does this work?</span>
-        <p className="max-w-sm text-center text-sm">
-          Here, you can simply enter your own OpenAI API key and start chatting
-          with any text-based AI model, but you're only going to{' '}
-          <strong className="text-[#10A37F]">pay for what you use</strong>.
-        </p>
-      </div>
+      <div className="flex gap-9 pt-9">
+        <div className="text-center text-sm">
+          <span className="font-bold">How does this work?</span>
+          <p className="max-w-sm">
+            You can simply enter your own OpenAI API key and start chatting with
+            any text-based AI model, paying only for what you use.
+          </p>
+        </div>
 
-      <div className="mt-20">
-        <span className="text-sm">*github link here*</span>
+        <div className="flex flex-col items-center justify-center text-center text-sm">
+          <span className="font-bold">Is this safe?</span>
+          <span className="max-w-sm pb-2">
+            This is an open-source project, and you can find the source by
+            clicking the GitHub icon below.
+          </span>
+          <a
+            href="https://github.com"
+            target="_blank"
+            title="GitHub Repository"
+          >
+            <Github size={28} />
+          </a>
+        </div>
       </div>
     </div>
   );

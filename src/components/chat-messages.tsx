@@ -10,27 +10,39 @@ export const ChatMessages = () => {
   const inverseMessages = [...messages].reverse();
 
   return (
-    <div className="w-full overflow-y-auto">
-      <div className="mx-auto w-[48rem]">
-        <div className="flex flex-col-reverse gap-9">
-          <div className="flex-1 flex-grow" />
-          {inverseMessages.map((message, index) => (
-            <div className="chat-message flex gap-2" key={index}>
-              <div className="w-[24px]">
-                {message.isUserMessage ? <User size={24} /> : <Bot size={24} />}
-              </div>
-              <div className="flex flex-col gap-2">
-                <span className="text-sm font-semibold">
-                  {message.isUserMessage ? 'User' : 'ChatGPT'}
-                </span>
-                <span className="text-sm">
-                  <MarkdownLite text={message.text} />
-                </span>
-              </div>
+    <>
+      {inverseMessages.length > 0 ? (
+        <div className="h-full w-full overflow-y-auto py-6">
+          <div className="mx-auto w-[48rem]">
+            <div className="flex flex-col-reverse gap-9">
+              <div className="flex-1 flex-grow" />
+              {inverseMessages.map((message, index) => (
+                <div className="chat-message flex gap-2" key={index}>
+                  <div className="w-[24px]">
+                    {message.isUserMessage ? (
+                      <User size={24} />
+                    ) : (
+                      <Bot size={24} />
+                    )}
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <span className="text-sm font-semibold">
+                      {message.isUserMessage ? 'User' : 'ChatGPT'}
+                    </span>
+                    <span className="text-sm">
+                      <MarkdownLite text={message.text} />
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div className="flex h-full w-full items-center justify-center">
+          <span className="text-sm">No messages yet</span>
+        </div>
+      )}
+    </>
   );
 };
