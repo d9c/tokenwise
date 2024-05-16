@@ -84,37 +84,39 @@ export const ChatInput = () => {
   });
 
   return (
-    <div className="relative mx-auto w-[48rem] text-base">
-      <TextareaAutosize
-        ref={textareaRef}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            const message: Message = {
-              id: nanoid(),
-              isUserMessage: true,
-              text: input,
-            };
-            sendMessage(message);
-          }
-        }}
-        rows={1}
-        maxRows={4}
-        value={input}
-        autoFocus
-        disabled={isPending}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Write a message..."
-        className="block w-full resize-none rounded-lg border border-[#9b9b9b] bg-transparent py-3.5 pl-6 pr-12 text-sm text-white focus:outline-none disabled:opacity-50"
-      />
-      <div className="absolute bottom-1.5 right-2">
-        <button className="flex h-[30px] w-[30px] items-center justify-center rounded-lg bg-white">
-          {isPending ? (
-            <Loader2 color="black" size={24} className="animate-spin" />
-          ) : (
-            <CornerDownLeft color="black" size={24} />
-          )}
-        </button>
+    <div className="py-6">
+      <div className="relative mx-auto w-[48rem]">
+        <TextareaAutosize
+          ref={textareaRef}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+              e.preventDefault();
+              const message: Message = {
+                id: nanoid(),
+                isUserMessage: true,
+                text: input,
+              };
+              sendMessage(message);
+            }
+          }}
+          rows={1}
+          maxRows={4}
+          value={input}
+          autoFocus
+          disabled={isPending}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Write a message..."
+          className="block w-full resize-none rounded-lg border border-[#9b9b9b] bg-transparent py-3.5 pl-6 pr-12 text-sm text-white focus:outline-none disabled:opacity-50"
+        />
+        <div className="absolute bottom-1.5 right-2">
+          <button className="flex h-[30px] w-[30px] items-center justify-center rounded-lg bg-white">
+            {isPending ? (
+              <Loader2 color="black" size={24} className="animate-spin" />
+            ) : (
+              <CornerDownLeft color="black" size={24} />
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );
